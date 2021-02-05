@@ -10,15 +10,17 @@ def lazyStochasticGradientDescent(thetas, thetaShapes,X, y, lam,  alpha, iterati
             Xstoch = X[index:index+batchSize,:]
             ystoch = y[index:index+batchSize]
 
-            DS = findDeltas(thetas,thetaShapes,Xstoch,ystoch, 1)
-            J = cFunction(thetas,thetaShapes,Xstoch,ystoch, 1)
+            #DS = findDeltas(thetas,thetaShapes,Xstoch,ystoch, lam)
+            #J = cFunction(thetas,thetaShapes,Xstoch,ystoch, lam)
+
+            J, DS = costFunction(thetas,thetaShapes,Xstoch,ystoch, lam)
             print("The cost at iteration %s is: " % i, J)
             thetas = thetas - np.multiply(alpha,DS)
 
     else:
         randIndList = random.sample(range(0,m-batchSize),iterations)
         for i, index in enumerate(randIndList):
-            J, DS = costFunction(thetas,thetaShapes,X,y, 1)
+            J, DS = costFunction(thetas,thetaShapes,X,y, lam)
             thetas = thetas - np.multiply(alpha,DS)
             print("The cost at iteration %s is: " % i,J)
     return thetas

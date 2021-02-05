@@ -32,6 +32,9 @@ def costFunction(thetaVector, hiddenLayerShapes, X, y,  lam=0):
     zs = [0] * len(thetas)
     
     #Find the Cost J, should work with one or more hidden layers
+    #In practice the code uses the two functions below this that 
+    #separately return the deltas and cost. Had to do this to make it
+    #work with the SciPys optimizing function
     for i, theta in enumerate(thetas):
         activation = np.concatenate((np.ones((1, activation.shape[1])), activation))
         zs[i] = np.matmul(theta,activation)
@@ -70,7 +73,7 @@ def costFunction(thetaVector, hiddenLayerShapes, X, y,  lam=0):
 
     return J, Deltas
 
-
+#Almost Same as above but only returns cost
 def cFunction(thetaVector, hiddenLayerShapes, X, y,  lam=0):
     
     layers = len(hiddenLayerShapes)
@@ -102,6 +105,7 @@ def cFunction(thetaVector, hiddenLayerShapes, X, y,  lam=0):
 
     return J
 
+#Almost same as above but just returns deltas.
 def findDeltas(thetaVector, hiddenLayerShapes, X, y,  lam=0):
     #Find the gradients
 
@@ -158,6 +162,8 @@ def findDeltas(thetaVector, hiddenLayerShapes, X, y,  lam=0):
 
 #Wrapper Functions that return only cost or only gradients
 #For the scipy minimize function
+#This solution didn't end up working so I had to go with the silly one above
+#Should probably fix this
 def costAlone( aFunc ):
     def pick0( thetaVector, hiddenLayerShapes, X, y,  lam=1):
         return aFunc(thetaVector, hiddenLayerShapes, X, y,  lam=0)[0]
