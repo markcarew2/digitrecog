@@ -32,9 +32,6 @@ def costFunction(thetaVector, hiddenLayerShapes, X, y,  lam=0):
     zs = [0] * len(thetas)
     
     #Find the Cost J, should work with one or more hidden layers
-    #In practice the code uses the two functions below this that 
-    #separately return the deltas and cost. Had to do this to make it
-    #work with the SciPys optimizing function
     for i, theta in enumerate(thetas):
         activation = np.concatenate((np.ones((1, activation.shape[1])), activation))
         zs[i] = np.matmul(theta,activation)
