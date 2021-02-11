@@ -27,6 +27,8 @@ def miniBatchGradientDescent(thetas, thetaShapes,X, y, lam,  alpha, iterations, 
                 J, DS = costFunction(thetas,thetaShapes,X,y, lam)
                 thetas = thetas - np.multiply(alpha,DS)
         
-        print("The cost at iteration %s is: " % i, J)
+
+        J, DS = costFunction(thetas,thetaShapes,X[0:10000,:],y[0:10000], lam)
+        print("The cost at iteration %s is approximately: " % i, J)
         
     return thetas
