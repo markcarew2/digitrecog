@@ -50,9 +50,14 @@ theta2 = np.concatenate((np.transpose([[1]*10]), theta2), axis=1)
 
 thetas = np.concatenate((theta1.flatten(), theta2.flatten()))
 
+#Set the layers, number of layers and shape
+#Format is a list of tuples, each tuple is a layer with pattern: (outputNodes, inputNodes)
+#They have to be dense, meaning: layers[i][0] == layers[i+1][1] + 1, must be true 
+layers = [(50,785), (10, 51)]
+
 #Training the network
 startTime = time.time()
-trainedNetwork = miniBatchGradientDescent(thetas, [(50,785), (10, 51)], trainX,trainY,.00001, .9, 20,100)
+trainedNetwork = miniBatchGradientDescent(thetas, layers, trainX,trainY,.00001, .9, 20,100)
 SGDTime = time.time()-startTime
 
 #obj_fun = lambda x: cFunction(x, [(25,785), (10, 26)], trainX,trainY,.001)
@@ -72,8 +77,7 @@ print("***********************")
 print("Gradient Descent Validation Accuracy: ", accuracy(validX,validY,[(50,785), (10, 51)],trainedNetwork))
 #print("SciPy Validation Accuracy: ", accuracy(validX,validY,[(25,785), (10, 26)],rez.x))
 
-with open('SGDThetas.npy', 'wb') as f:
-    np.save(f, trainedNetwork)
+np.savetxt("SGDThetas.csv", trainedNetwork, delimiter=',')
 """
 with open('SciPyThetas.npy', 'wb') as f:
     np.save(f, rez.x)

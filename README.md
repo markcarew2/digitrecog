@@ -1,8 +1,6 @@
 Digit Recognition Neural Network
 
-Based on the NN in the Andrew Ng Machine Learning Course.
-
-Fully vectorized over the examples. 
+Fully vectorized over the examples.
 
 Properly implemented mini batch gradient descent now. It reaches good validation error very quickly.
 
@@ -14,4 +12,4 @@ Need to play with the parameters, can try other initializations of the weights (
 
 Should add a feature to allow for loading the saved parameters. Should probably try to make this object oriented.
 
-Have commented out code related to SciPy minimize, was slow and ineffective.
+Have commented out code related to SciPy minimize.
